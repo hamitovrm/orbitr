@@ -3,6 +3,7 @@ import torch
 import requests
 import streamlit as st
 from PIL import Image
+import json
 
 
 
@@ -19,13 +20,17 @@ API_URL_IMG = "https://api-inference.huggingface.co/models/ydshieh/vit-gpt2-coco
 headers = {"Authorization": f"Bearer {'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'}"}
 
 def img2txt(image):
-    response = requests.request("POST", API_URL_IMG, headers=headers, data=image)
-    return json.loads(response.content.decode("utf-8"))
+    with io.BytesIO() as buf:
+        image.save(buf, 'jpeg')
+        image_bytes = buf.getvalue()
+    response = requests.post(API_URL_IMG, headers=headers, data=image_bytes )
+    return response.json
 
 
 def predict(image):
     preds = img2txt(image)
-    preds = [pred.strip() for pred in preds]
+    preds = [pred.strip() for pred in preds()]
+    st.write(str(preds))
     return preds
 
 def load_image():
@@ -45,21 +50,13 @@ def print_predictions(preds):
         for tt in tr_test:
             st.write(str(tt['translation_text']))
             
-url = "http://images.cocodataset.org/val2017/000000039769.jpg"
-with Image.open(requests.get(url, stream=True).raw) as image:
-    st.image(image)
-    preds = predict(image)
-    st.write(preds)
-    print_predictions(preds)        
-    st.write(type(image))    
-            
+
 st.title('Распознавание объектов с переводом на разные языки')
 x_image = Image.open(io.BytesIO(load_image()))
+st.image(x_image) 
 result = st.button('Распознать изображение')
 if result:
-    st.write(type(x_image)) 
-    with x_image as image:
-        st.write(type(image)) 
+    with x_image  as image:
         preds = predict(image)
         st.write('**Результаты распознавания:**')
         print_predictions(preds)
