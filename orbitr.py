@@ -3,8 +3,8 @@ import requests
 import streamlit as st
 from PIL import Image
 import numpy as np
-import torch
-from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
+#import torch
+from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer, AutoModel
 
 API_URL_ta = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-mul"
 headers = {"Authorization": f"Bearer {'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'}"}
@@ -14,13 +14,16 @@ def translate(payload, API_URL):
 	return response.json
 	
 
+	
+	
 
-model = VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 feature_extractor = ViTFeatureExtractor.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 tokenizer = AutoTokenizer.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
+model = AutoModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model.to(device)
+
+#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#model.to(device)
 
 
 max_length = 16
