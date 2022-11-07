@@ -6,7 +6,7 @@ import numpy as np
 #from tensorflow.keras.applications import EfficientNetB0
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
-from transformers import TFVisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
+from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
 
 #API_URL_ru = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-ru"
 API_URL_ta = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-mul"
@@ -18,7 +18,7 @@ def translate(payload, API_URL):
 	
 
 
-model = TFVisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
+model = VisionEncoderDecoderModel.from_encoder_decoder_pretrained("nlpconnect/vit-gpt2-image-captioning", from_pt=True)
 feature_extractor = ViTFeatureExtractor.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 tokenizer = AutoTokenizer.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 
