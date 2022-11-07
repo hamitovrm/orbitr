@@ -1,46 +1,33 @@
 import io
+import torch
 import requests
 import streamlit as st
 from PIL import Image
-import numpy as np
-import jax
-import torch
-from transformers import ViTFeatureExtractor, AutoTokenizer, FlaxVisionEncoderDecoderModel
+from transformers import ViTFeatureExtractor, AutoTokenizer, VisionEncoderDecoderModel
 
-
-API_URL_ta = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-mul"
-headers = {"Authorization": f"Bearer {'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'}"}
-
-def translate(payload, API_URL):
-	response = requests.post(API_URL, headers=headers, json=payload )
-	return response.json
-	
 loc = "ydshieh/vit-gpt2-coco-en"
 
 feature_extractor = ViTFeatureExtractor.from_pretrained(loc)
 tokenizer = AutoTokenizer.from_pretrained(loc)
-model = FlaxVisionEncoderDecoderModel.from_pretrained(loc)
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model.to(device)
-
-gen_kwargs = {"max_length": 16, "num_beams": 4}
+model = VisionEncoderDecoderModel.from_pretrained(loc)
+model.eval()
 
 
-# This takes sometime when compiling the first time, but the subsequent inference will be much faster
-
-def generate(pixel_values):
-    output_ids = model.generate(pixel_values, **gen_kwargs).sequences
-    return output_ids
-    
-    
 def predict(image):
-    pixel_values = feature_extractor(images=image, return_tensors="np").pixel_values
-    output_ids = generate(pixel_values)
+
+    pixel_values = feature_extractor(images=image, return_tensors="pt").pixel_values
+
+    with torch.no_grad():
+        output_ids = model.generate(pixel_values, max_length=16, num_beams=4, return_dict_in_generate=True).sequences
+
     preds = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
-    preds = [pred.strip() for pred in preds] 
+    preds = [pred.strip() for pred in preds]
+
     return preds
 
+
+API_URL_ta = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-mul"
+headers = {"Authorization": f"Bearer {'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'}"}
 
 def load_image():
     uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
