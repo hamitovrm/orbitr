@@ -2,4 +2,3 @@ streamlit
 requests
 tenzorflow-cpu
 transformers
-torch
