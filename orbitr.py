@@ -29,7 +29,12 @@ def translate(payload, API_URL):
 	response = requests.post(API_URL, headers=headers, json=payload )
 	return response.json
 	
-
+def preprocess_image(img):
+    img = img.resize((224, 224))
+    x = image.img_to_array(img)
+    x = np.expand_dims(x, axis=0)
+    x = preprocess_input(x)
+    return x
 
 def load_image():
     uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
@@ -59,8 +64,8 @@ st.title('Распознавание объектов с переводом на
 img = load_image()
 result = st.button('Распознать изображение')
 
-#if result:
-#   preds = predict(img)
-#   st.write('**Результаты распознавания:**')
-#   print_predictions(preds)
+if result:
+   preds = predict(img)
+   st.write('**Результаты распознавания:**')
+   print_predictions(preds)
 
