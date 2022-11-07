@@ -19,7 +19,7 @@ model = VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-cap
 feature_extractor = ViTFeatureExtractor.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 tokenizer = AutoTokenizer.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 
-device = tortensorflowch.device("cuda" if tensorflow.cuda.is_available() else "cpu")
+device = torch.device("cuda" if tensorflow.cuda.is_available() else "cpu")
 model.to(device)
 
 
