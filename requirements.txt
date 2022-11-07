@@ -1,4 +1,5 @@
 streamlit
+PyTorch 
 tensorflow-cpu
 requests
 transformers

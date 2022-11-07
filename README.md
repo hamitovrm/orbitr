@@ -10,3 +10,6 @@ https://huggingface.co/nlpconnect/vit-gpt2-image-captioning
 https://huggingface.co/Helsinki-NLP/opus-mt-en-mul
 
 Интерфейс реализован на базе Streamlit.
+
+Для локального запуска ввести в коммандной строке:
+streamlit run orbitr.py

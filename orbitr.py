@@ -3,7 +3,7 @@ import requests
 import streamlit as st
 from PIL import Image
 import numpy as np
-from tensorflow.keras.applications import EfficientNetB0
+#from tensorflow.keras.applications import EfficientNetB0
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
 from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
@@ -22,7 +22,7 @@ model = VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-cap
 feature_extractor = ViTFeatureExtractor.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 tokenizer = AutoTokenizer.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = tortensorflowch.device("cuda" if tensorflow.cuda.is_available() else "cpu")
 model.to(device)
 
 
