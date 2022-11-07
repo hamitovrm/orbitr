@@ -19,7 +19,7 @@ def translate(payload, API_URL):
 	
 
 
-model = VisionEncoderDecoderModel.from_encoder_decoder_pretrained("nlpconnect/vit-gpt2-image-captioning", from_pt=True)
+model = VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning", from_pt=True)
 feature_extractor = ViTFeatureExtractor.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 tokenizer = AutoTokenizer.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 
