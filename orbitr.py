@@ -61,6 +61,7 @@ with Image.open(requests.get(url, stream=True).raw) as image:
             
 st.title('Распознавание объектов с переводом на разные языки')
 x_image = load_image()
+st.image(x_image)
 
 result = st.button('Распознать изображение')
 if result:
