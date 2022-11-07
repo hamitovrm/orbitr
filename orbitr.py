@@ -31,10 +31,10 @@ def translate(payload, API_URL):
 	
 def preprocess_image(img):
     img = img.resize((224, 224))
-    x = image.img_to_array(img)
-    x = np.expand_dims(x, axis=0)
-    x = preprocess_input(x)
-    return x
+    #x = image.img_to_array(img)
+    #x = np.expand_dims(x, axis=0)
+    #x = preprocess_input(x)
+    return img#x
 
 def load_image():
     uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
@@ -54,6 +54,7 @@ def print_predictions(preds):
         for tt in tr_test:
             #st.write(str(tt['translation_text']))
             st.write(str(tt))
+            
 url = "http://images.cocodataset.org/val2017/000000039769.jpg"
 with Image.open(requests.get(url, stream=True).raw) as image:
     preds = predict(image)
@@ -65,7 +66,8 @@ img = load_image()
 result = st.button('Распознать изображение')
 
 if result:
-   preds = predict(img)
+   x=preprocess_image(img):
+   preds = predict(x)
    st.write('**Результаты распознавания:**')
    print_predictions(preds)
 
