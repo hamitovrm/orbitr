@@ -3,23 +3,7 @@ import torch
 import requests
 import streamlit as st
 from PIL import Image
-from transformers import ViTFeatureExtractor, AutoTokenizer, VisionEncoderDecoderModel
 
-loc = "ydshieh/vit-gpt2-coco-en"
-
-feature_extractor = ViTFeatureExtractor.from_pretrained(loc)
-tokenizer = AutoTokenizer.from_pretrained(loc)
-model = VisionEncoderDecoderModel.from_pretrained(loc)
-model.eval()
-
-
-def predict(image):
-    pixel_values = feature_extractor(images=image, return_tensors="pt").pixel_values
-    with torch.no_grad():
-        output_ids = model.generate(pixel_values, max_length=16, num_beams=4, return_dict_in_generate=True).sequences
-    preds = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
-    preds = [pred.strip() for pred in preds]
-    return preds
 
 
 API_URL_ta = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-mul"
@@ -29,6 +13,20 @@ def translate(payload, API_URL):
 	response = requests.post(API_URL, headers=headers, json=payload )
 	return response.json
 	
+
+
+API_URL_IMG = "https://api-inference.huggingface.co/models/ydshieh/vit-gpt2-coco-en-ckpts"
+headers = {"Authorization": f"Bearer {'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'}"}
+
+def img2txt(image):
+    response = requests.request("POST", API_URL_IMG, headers=headers, data=image)
+    return json.loads(response.content.decode("utf-8"))
+
+
+def predict(image):
+    preds = img2txt(image)
+    preds = [pred.strip() for pred in preds]
+    return preds
 
 def load_image():
     uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
@@ -59,8 +57,8 @@ st.title('Распознавание объектов с переводом на
 x_image = Image.open(io.BytesIO(load_image()))
 result = st.button('Распознать изображение')
 if result:
+    st.write(type(x_image)) 
     with x_image as image:
-        st.image(image)
         st.write(type(image)) 
         preds = predict(image)
         st.write('**Результаты распознавания:**')
