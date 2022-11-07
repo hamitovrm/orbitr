@@ -38,6 +38,7 @@ def load_image():
         if i_image.mode != "RGB":
            i_image = i_image.convert(mode="RGB")
         st.image(i_image)
+        st.write(type(i_image)) 
         return i_image
     else:
         return None
@@ -62,7 +63,6 @@ with Image.open(requests.get(url, stream=True).raw) as image:
             
 st.title('Распознавание объектов с переводом на разные языки')
 x_image = load_image()
-st.write(type(x_image)) 
 
 result = st.button('Распознать изображение')
 if result:
