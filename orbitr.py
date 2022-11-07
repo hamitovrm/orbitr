@@ -41,7 +41,12 @@ def load_image():
     if uploaded_file is not None:
         image_data = uploaded_file.getvalue()
         st.image(image_data)
-        return Image.open(io.BytesIO(image_data))
+        i_image = Image.open(io.BytesIO(image_data))
+        if i_image.mode != "RGB":
+           i_image = i_image.convert(mode="RGB")
+        i_image.convert(mode="RGB")
+        x=preprocess_image(i_image)
+        return x
     else:
         return None
 
@@ -63,8 +68,8 @@ with Image.open(requests.get(url, stream=True).raw) as image:
             
 st.title('Распознавание объектов с переводом на разные языки')
 img = load_image()
-result = st.button('Распознать изображение')
 
+result = st.button('Распознать изображение')
 if result:
    x=preprocess_image(img)
    #preds = predict(x)
