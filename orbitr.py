@@ -4,6 +4,7 @@ import streamlit as st
 from PIL import Image
 import numpy as np
 import jax
+import torch
 from transformers import ViTFeatureExtractor, AutoTokenizer, FlaxVisionEncoderDecoderModel
 
 
@@ -19,6 +20,9 @@ loc = "ydshieh/vit-gpt2-coco-en"
 feature_extractor = ViTFeatureExtractor.from_pretrained(loc)
 tokenizer = AutoTokenizer.from_pretrained(loc)
 model = FlaxVisionEncoderDecoderModel.from_pretrained(loc)
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
 
 gen_kwargs = {"max_length": 16, "num_beams": 4}
 
