@@ -56,7 +56,9 @@ with Image.open(requests.get(url, stream=True).raw) as image:
     st.write(type(image))    
             
 st.title('Распознавание объектов с переводом на разные языки')
-x_image = Image.open(io.BytesIO(load_image()))
+image_data=load_image()
+st.write(type(image_data))
+x_image = Image.open(io.BytesIO(image_data))
 st.image(x_image)
 result = st.button('Распознать изображение')
 if result:
