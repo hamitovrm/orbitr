@@ -1,7 +1,5 @@
 streamlit
+torch
 transformers
 requests
 tensorflow-cpu
-jax
-flax
-torch
