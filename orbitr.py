@@ -4,10 +4,10 @@ import streamlit as st
 from PIL import Image
 import numpy as np
 #from tensorflow.keras.applications import EfficientNetB0
+import torch
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
 from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
-import torch
 
 #API_URL_ru = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-ru"
 API_URL_ta = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-mul"
