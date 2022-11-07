@@ -46,7 +46,8 @@ def print_predictions(preds):
 url = "http://images.cocodataset.org/val2017/000000039769.jpg"
 with Image.open(requests.get(url, stream=True).raw) as image:
     preds = predict(image)
-print_predictions(preds)             
+    st.write(preds)
+    print_predictions(preds)             
             
 st.title('Распознавание объектов с переводом на разные языки')
 img = load_image()
