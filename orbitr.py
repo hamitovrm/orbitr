@@ -37,9 +37,8 @@ def load_image():
         i_image = Image.open(io.BytesIO(image_data))
         if i_image.mode != "RGB":
            i_image = i_image.convert(mode="RGB")
-        i_image.convert(mode="RGB")
-        st.image(x)
-        return x
+        st.image(i_image)
+        return i_image
     else:
         return None
 
