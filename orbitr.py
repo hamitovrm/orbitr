@@ -67,7 +67,7 @@ result = st.button('Распознать изображение')
 
 if result:
    x=preprocess_image(img)
-   preds = predict(x)
-   st.write('**Результаты распознавания:**')
-   print_predictions(preds)
+   #preds = predict(x)
+   #st.write('**Результаты распознавания:**')
+   #print_predictions(preds)
 
