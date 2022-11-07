@@ -14,15 +14,11 @@ model.eval()
 
 
 def predict(image):
-
     pixel_values = feature_extractor(images=image, return_tensors="pt").pixel_values
-
     with torch.no_grad():
         output_ids = model.generate(pixel_values, max_length=16, num_beams=4, return_dict_in_generate=True).sequences
-
     preds = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
     preds = [pred.strip() for pred in preds]
-
     return preds
 
 
@@ -52,7 +48,7 @@ st.title('Распознавание объектов с переводом на
 img = load_image()
 result = st.button('Распознать изображение')
 if result:
-    preds = predict(img)
-    st.write('**Результаты распознавания:**')
-    print_predictions(preds)
+   preds = predict(img)
+   st.write('**Результаты распознавания:**')
+   print_predictions(preds)
 
