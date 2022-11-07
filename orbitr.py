@@ -40,12 +40,12 @@ def load_image():
     uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
     if uploaded_file is not None:
         image_data = uploaded_file.getvalue()
-        st.image(image_data)
         i_image = Image.open(io.BytesIO(image_data))
         if i_image.mode != "RGB":
            i_image = i_image.convert(mode="RGB")
         i_image.convert(mode="RGB")
         x=preprocess_image(i_image)
+        st.image(x)
         return x
     else:
         return None
