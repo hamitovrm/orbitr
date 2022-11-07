@@ -34,7 +34,7 @@ def predict_step(image_paths):
   images = []
   #for image_path in image_paths:
     #i_image = Image.open(image_path)
-. i_image= image_paths
+  i_image= image_paths
   if i_image.mode != "RGB":
     i_image = i_image.convert(mode="RGB")
 
