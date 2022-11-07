@@ -25,6 +25,12 @@ def predict(image):
 API_URL_ta = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-mul"
 headers = {"Authorization": f"Bearer {'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'}"}
 
+def translate(payload, API_URL):
+	response = requests.post(API_URL, headers=headers, json=payload )
+	return response.json
+	
+
+
 def load_image():
     uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
     if uploaded_file is not None:
