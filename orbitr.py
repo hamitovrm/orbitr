@@ -70,7 +70,7 @@ if result:
    #x=preprocess_image(img)
    with x_image as image:
     st.write(type(image)) 
-    preds = predict(image)
+    #preds = predict(image)
     #st.write('**Результаты распознавания:**')
     #print_predictions(preds)
 
