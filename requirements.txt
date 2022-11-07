@@ -2,4 +2,5 @@ streamlit
 transformers
 requests
 tensorflow-cpu
-
+jax
+flax
