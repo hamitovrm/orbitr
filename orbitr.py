@@ -35,9 +35,10 @@ def load_image():
     if uploaded_file is not None:
         image_data = uploaded_file.getvalue()
         i_image = Image.open(io.BytesIO(image_data))
+        st.write(type(i_image)) 
         if i_image.mode != "RGB":
            i_image = i_image.convert(mode="RGB")
-        st.image(i_image)
+        #st.image(i_image)
         st.write(type(i_image)) 
         return i_image
     else:
