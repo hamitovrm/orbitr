@@ -3,13 +3,9 @@ import requests
 import streamlit as st
 from PIL import Image
 import numpy as np
-#from tensorflow.keras.applications import EfficientNetB0
 import torch
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
 from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
 
-#API_URL_ru = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-ru"
 API_URL_ta = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-mul"
 headers = {"Authorization": f"Bearer {'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'}"}
 
@@ -49,13 +45,6 @@ def predict_step(image_paths):
   preds = [pred.strip() for pred in preds]
   return preds
 
-def preprocess_image(img):
-    img = img.resize((224, 224))
-    x = image.img_to_array(img)
-    x = np.expand_dims(x, axis=0)
-    x = preprocess_input(x)
-    return x
-
 
 def load_image():
     uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
@@ -78,14 +67,11 @@ def print_predictions(preds):
             st.write(str(tt['translation_text']))
 
 
-model = load_model()
-
 st.title('Распознавание объектов с переводом на разные языки')
 img = load_image()
 result = st.button('Распознать изображение')
 if result:
-    x = preprocess_image(img)
-    preds = predict_step(x)
+    preds = predict_step(img)
     st.write('**Результаты распознавания:**')
     print_predictions(preds)
 
