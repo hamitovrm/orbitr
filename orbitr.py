@@ -59,8 +59,8 @@ st.title('Распознавание объектов с переводом на
 img = load_image()
 result = st.button('Распознать изображение')
 
-if result:
-   preds = predict(img)
-   st.write('**Результаты распознавания:**')
-   print_predictions(preds)
+#if result:
+#   preds = predict(img)
+#   st.write('**Результаты распознавания:**')
+#   print_predictions(preds)
 
