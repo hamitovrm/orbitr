@@ -52,8 +52,8 @@ def print_predictions(preds):
         trans_ta = translate({"inputs": [">>rus<< "+en_text, ">>tat<< "+en_text, ">>deu<< "+en_text,],}, API_URL_ta)
         tr_test=tuple(trans_ta())
         for tt in tr_test:
-            st.write(str(tt['translation_text']))
-
+            #st.write(str(tt['translation_text']))
+            st.write(str(tt))
 url = "http://images.cocodataset.org/val2017/000000039769.jpg"
 with Image.open(requests.get(url, stream=True).raw) as image:
     preds = predict(image)
