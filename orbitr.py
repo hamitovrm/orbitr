@@ -59,11 +59,11 @@ with Image.open(requests.get(url, stream=True).raw) as image:
 st.title('Распознавание объектов с переводом на разные языки')
 image_data=load_image()
 st.write(type(image_data))
-result = st.button('Распознать изображение')
-if result:
-    with image_data as image:
-        st.image(image)
-        preds = predict(image)
-        st.write('**Результаты распознавания:**')
-        print_predictions(preds)
+#result = st.button('Распознать изображение')
+#if result:
+#    with image_data as image:
+#        st.image(image)
+#        preds = predict(image)
+#        st.write('**Результаты распознавания:**')
+#        print_predictions(preds)
 
