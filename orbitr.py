@@ -34,7 +34,8 @@ def load_image():
     uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
     if uploaded_file is not None:
         image_data = uploaded_file.getvalue()
-        return image_data
+        st.image(image_data)
+        return Image.open(io.BytesIO(image_data))
     else:
         return None
 
@@ -60,7 +61,7 @@ image_data=load_image()
 st.write(type(image_data))
 result = st.button('Распознать изображение')
 if result:
-    with Image.open(io.BytesIO(image_data)) as image:
+    with image_data as image:
         st.image(image)
         preds = predict(image)
         st.write('**Результаты распознавания:**')
