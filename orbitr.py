@@ -3,23 +3,37 @@ import torch
 import requests
 import streamlit as st
 from PIL import Image
-from transformers import ViTFeatureExtractor, AutoTokenizer, VisionEncoderDecoderModel
+from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
 
-loc = "ydshieh/vit-gpt2-coco-en"
+model = VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
+feature_extractor = ViTFeatureExtractor.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
+tokenizer = AutoTokenizer.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 
-feature_extractor = ViTFeatureExtractor.from_pretrained(loc)
-tokenizer = AutoTokenizer.from_pretrained(loc)
-model = VisionEncoderDecoderModel.from_pretrained(loc)
-model.eval()
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
 
 
-def predict(image):
-    pixel_values = feature_extractor(images=image, return_tensors="pt").pixel_values
-    with torch.no_grad():
-        output_ids = model.generate(pixel_values, max_length=16, num_beams=4, return_dict_in_generate=True).sequences
-    preds = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
-    preds = [pred.strip() for pred in preds]
-    return preds
+
+max_length = 16
+num_beams = 4
+gen_kwargs = {"max_length": max_length, "num_beams": num_beams}
+
+def predict_step(image):
+  images = []
+  if image.mode != "RGB":
+     image = image.convert(mode="RGB")
+  images.append(image)
+
+  pixel_values = feature_extractor(images=images, return_tensors="pt").pixel_values
+  pixel_values = pixel_values.to(device)
+
+  output_ids = model.generate(pixel_values, **gen_kwargs)
+
+  preds = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
+  preds = [pred.strip() for pred in preds]
+  return preds
+
+
 
 
 API_URL_ta = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-mul"
@@ -59,11 +73,11 @@ with Image.open(requests.get(url, stream=True).raw) as image:
 st.title('Распознавание объектов с переводом на разные языки')
 image_data=load_image()
 st.write(type(image_data))
-#result = st.button('Распознать изображение')
-#if result:
-#    with image_data as image:
-#        st.image(image)
-#        preds = predict(image)
-#        st.write('**Результаты распознавания:**')
-#        print_predictions(preds)
+result = st.button('Распознать изображение')
+if result:
+    with image_data as image:
+        st.image(image)
+        preds = predict_step(image)
+        st.write('**Результаты распознавания:**')
+        st.write(str(preds))
 
