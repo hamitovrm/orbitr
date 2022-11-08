@@ -65,7 +65,7 @@ def print_predictions(preds):
 url = "http://images.cocodataset.org/val2017/000000039769.jpg"
 with Image.open(requests.get(url, stream=True).raw) as image:
     st.image(image)
-    preds = predict(image)
+    preds = predict_step(image)
     st.write(preds)
     print_predictions(preds)        
     st.write(type(image))    
