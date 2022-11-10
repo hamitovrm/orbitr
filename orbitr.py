@@ -40,6 +40,7 @@ def load_image():
     if uploaded_file is not None:
         image_data = uploaded_file.getvalue()
         st.image(image_data)
+        st.write(type(image_data))
         return Image.open(io.BytesIO(image_data))
     else:
         return None
@@ -67,14 +68,14 @@ def print_predictions(preds):
             
 st.title('Распознавание объектов с переводом на разные языки')
 im=load_image()
-st.write(type(im))
+
 
 result = st.button('Распознать изображение')
 if result:
    #im.load()
    x=preprocess_image(im)
-   #st.write(type(x))
-   preds = predict_step(x)
+   st.write(type(x))
+   #preds = predict_step(x)
 #        st.write('**Результаты распознавания:**')
 #        st.write(str(preds))
 
