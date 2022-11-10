@@ -3,8 +3,6 @@ import torch
 import requests
 import streamlit as st
 from PIL import Image
-import numpy as np
-#from tensorflow.keras.preprocessing import image
 from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
 
 model = VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
@@ -43,7 +41,12 @@ def load_image():
         image_data = uploaded_file.getvalue()
         #st.image(image_data)
         #st.write(type(image_data))
-        return Image.open(io.BytesIO(image_data))
+        byteImgIO = io.BytesIO()
+        byteImg = Image.open(byteImgIO(image_data)
+        byteImg.save(byteImgIO, "JPG")
+        byteImgIO.seek(0)
+        byteImg = byteImgIO.read()
+        return byteImg
     else:
         return None
 
