@@ -43,7 +43,7 @@ def load_image():
         #st.write(type(image_data))
         byteImgIO = io.BytesIO()
         byteImg = Image.open(byteImgIO(image_data)
-        byteImg.save(byteImgIO, "JPG")
+        #byteImg.save(byteImgIO, "JPG")
         byteImgIO.seek(0)
         byteImg = byteImgIO.read()
         return byteImg
