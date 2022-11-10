@@ -39,7 +39,8 @@ def load_image():
     uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
     if uploaded_file is not None:
         image_data = uploaded_file.getvalue()
-        return Image.open(io.BytesIO(image_data))
+        st.image(image_data)
+        return image_data # Image.open(io.BytesIO(image_data))
     else:
         return None
 
