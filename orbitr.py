@@ -40,7 +40,7 @@ def load_image():
     if uploaded_file is not None:
         image_data = uploaded_file.getvalue()
         st.image(image_data)
-        return image_data # Image.open(io.BytesIO(image_data))
+        return Image.open(io.BytesIO(image_data))
     else:
         return None
 
@@ -54,19 +54,20 @@ def print_predictions(preds):
             st.write(str(tt['translation_text']))
             
 url = "http://images.cocodataset.org/val2017/000000039769.jpg"
-with Image.open(requests.get(url, stream=True).raw) as image:
-    st.image(image)
-    preds = predict_step(image)
+with Image.open(requests.get(url, stream=True).raw) as image1:
+    st.image(image1)
+    preds = predict_step(image1)
     st.write(preds)
     print_predictions(preds)        
-    st.write(type(image))    
+    st.write(type(image1))    
             
 st.title('Распознавание объектов с переводом на разные языки')
 im=load_image()
-st.write(type(im))
+
 result = st.button('Распознать изображение')
 if result:
    with im as image:
+         st.write(type(image))
 #        preds = predict_step(im)
 #        st.write('**Результаты распознавания:**')
 #        st.write(str(preds))
