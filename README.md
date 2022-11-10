@@ -11,5 +11,7 @@ https://huggingface.co/Helsinki-NLP/opus-mt-en-mul
 
 Интерфейс реализован на базе Streamlit.
 
+https://orbitr.streamlit.app/
+
 Для локального запуска ввести в коммандной строке:
 streamlit run orbitr.py
