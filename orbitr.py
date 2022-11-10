@@ -74,7 +74,7 @@ if result:
    #im.load()
    x=preprocess_image(im)
    #st.write(type(x))
-         preds = predict_step(x)
+   preds = predict_step(x)
 #        st.write('**Результаты распознавания:**')
 #        st.write(str(preds))
 
