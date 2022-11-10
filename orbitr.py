@@ -44,6 +44,10 @@ def load_image():
     else:
         return None
 
+def preprocess_image(img):
+    img = img.resize((224, 224))
+
+
 def print_predictions(preds):
     for cl in preds:
         #st.write(str(cl).replace('_'," "))
@@ -67,7 +71,8 @@ im=load_image()
 result = st.button('Распознать изображение')
 if result:
    #im.load()
-   st.write(type(im))
+   x=preprocess_image(im)
+   st.write(type(x))
 #         preds = predict_step(image)
 #        st.write('**Результаты распознавания:**')
 #        st.write(str(preds))
