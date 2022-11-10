@@ -3,7 +3,8 @@ import torch
 import requests
 import streamlit as st
 from PIL import Image
-from tensorflow.keras.preprocessing import image
+import numpy as np
+#from tensorflow.keras.preprocessing import image
 from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
 
 model = VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
