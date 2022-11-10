@@ -37,16 +37,15 @@ def translate(payload, API_URL):
 
 def load_image():
     img = st.file_uploader(label='Выберите изображение для распознавания',type=['jpg','png','jpeg'])
-            
-            if img is not None:
-                file_details = {"Filename":img.name,"FileType":img.type,"FileSize":img.size}
-                st.write(file_details)
-                image = Image.open(img)
-                st.text("Original Image")
-                st.image(image,use_column_width=True)
-                return image
-            else:
-                return None
+    if img is not None:
+      file_details = {"Filename":img.name,"FileType":img.type,"FileSize":img.size}
+      st.write(file_details)
+      image = Image.open(img)
+      st.text("Original Image")
+      st.image(image,use_column_width=True)
+      return image
+    else:
+      return None
     #uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
     #if uploaded_file is not None:
     #    image_data = uploaded_file.getvalue()
