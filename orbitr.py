@@ -66,10 +66,9 @@ im=load_image()
 
 result = st.button('Распознать изображение')
 if result:
-   with im as image:
-         image.load()
-         st.write(type(image))
-         preds = predict_step(image)
+   #im.load()
+   st.write(type(im))
+#         preds = predict_step(image)
 #        st.write('**Результаты распознавания:**')
 #        st.write(str(preds))
 
