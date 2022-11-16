@@ -40,9 +40,11 @@ def load_image():
     if img is not None:
       #file_details = {"Filename":img.name,"FileType":img.type,"FileSize":img.size}
       #st.write(file_details)
+      image_data = img.getvalue()
+      st.image(image_data)
       image1 = Image.open(img)
       #st.text("Original Image")
-      st.image(image1,use_column_width=True)
+      #st.image(image1,use_column_width=True)
       return image1
     else:
       return None
