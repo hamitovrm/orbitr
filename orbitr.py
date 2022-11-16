@@ -36,17 +36,13 @@ def translate(payload, API_URL):
 	return response.json
 
 def load_image():
-    uploaded_file = st.file_uploader(label='Выберите изображение для распознавания',type=['jpg','png','jpeg'])
+    uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
     if uploaded_file is not None:
         image_data = uploaded_file.getvalue()
         st.image(image_data)
-        return image_data #Image.open(image_data)
+        return Image.open(io.BytesIO(image_data))
     else:
         return None
-
-def preprocess_image(img):
-    img = img.resize((224, 224))
-
 
 def print_predictions(preds):
     for cl in preds:
@@ -67,13 +63,9 @@ def print_predictions(preds):
             
 st.title('Распознавание объектов с переводом на разные языки')
 im=load_image()
-
-
 result = st.button('Распознать изображение')
 if result:
-   #im.load()
-   x=preprocess_image(im)
-   st.write(type(x))
+   st.write(type(im))
    #preds = predict_step(x)
 #        st.write('**Результаты распознавания:**')
 #        st.write(str(preds))
