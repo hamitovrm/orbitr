@@ -80,4 +80,5 @@ if result:
    preds = predict_step(im)
    st.write('**Результаты распознавания:**')
    st.write(str(preds))
+   print_predictions(preds) 
 
