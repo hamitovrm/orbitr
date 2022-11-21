@@ -16,4 +16,3 @@ https://orbitr.streamlit.app/
 Для локального запуска ввести в коммандной строке:
 streamlit run orbitr.py
 
-https://stackoverflow.com/questions/66409650/cant-demonstrate-uploaded-image-in-streamlit-with-pil
