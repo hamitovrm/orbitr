@@ -32,7 +32,7 @@ def translate(payload, API_URL):
 	return response.json
 
 def load_image():
-    uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
+    uploaded_file = st.file_uploader(label='Загрузите изображение:')
     if uploaded_file is not None:
         image_data = uploaded_file.getvalue()
         st.image(image_data)
@@ -51,8 +51,8 @@ def print_predictions(preds):
         for tt in tr_test:
             st.write(str(tt['translation_text']))
 
-	
-st.title('Распознавание объектов с переводом на разные языки')	
+st.title('ORBiTr')
+st.write('Распознавание объектов с переводом на разные языки')	
 model = load_model()	
 feature_extractor = load_feature_extractor()
 tokenizer=load_tokenizer()
@@ -72,14 +72,12 @@ headers = {"Authorization": f"Bearer {'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'}"}
 #    preds = predict_step(image1)
 #    st.write(preds)
 #    print_predictions(preds)        
-#    st.write(type(image1))    
             
 im=load_image()
-result = st.button('Распознать изображение')
+result = st.button('Распознать:')
 if result:
-   st.write(type(im))
    preds = predict_step(im)
-   st.write('**Результаты распознавания:**')
+   st.write('**На картинке:**')
    st.write(str(preds))
    print_predictions(preds) 
 
