@@ -79,6 +79,7 @@ headers = {"Authorization": f"Bearer {'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'}"}
 #    print_predictions(preds)        
             
 im=load_image()
+sleep_duration = 0.5
 result = st.button('Распознать и перевести:')
 if result:
    preds = predict_step(im)
