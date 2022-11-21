@@ -65,13 +65,14 @@ gen_kwargs = {"max_length": max_length, "num_beams": num_beams}
 API_URL_ta = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-mul"
 headers = {"Authorization": f"Bearer {'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'}"}
 
-url = "http://images.cocodataset.org/val2017/000000039769.jpg"
-with Image.open(requests.get(url, stream=True).raw) as image1:
-    st.image(image1)
-    preds = predict_step(image1)
-    st.write(preds)
-    print_predictions(preds)        
-    st.write(type(image1))    
+#Тестовое изображение
+#url = "http://images.cocodataset.org/val2017/000000039769.jpg"
+#with Image.open(requests.get(url, stream=True).raw) as image1:
+#    st.image(image1)
+#    preds = predict_step(image1)
+#    st.write(preds)
+#    print_predictions(preds)        
+#    st.write(type(image1))    
             
 im=load_image()
 result = st.button('Распознать изображение')
