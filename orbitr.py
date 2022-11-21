@@ -6,7 +6,9 @@ from PIL import Image
 from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
 
 @st.cache(allow_output_mutation=True)
-model = VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
+def load_model():
+    return VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
+
 feature_extractor = ViTFeatureExtractor.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 tokenizer = AutoTokenizer.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 
@@ -53,7 +55,8 @@ def print_predictions(preds):
         tr_test=tuple(trans_ta())
         for tt in tr_test:
             st.write(str(tt['translation_text']))
-            
+
+model = load_model()	
 url = "http://images.cocodataset.org/val2017/000000039769.jpg"
 with Image.open(requests.get(url, stream=True).raw) as image1:
     st.image(image1)
