@@ -44,7 +44,7 @@ def print_predictions(preds):
     for cl in preds:
         #st.write(str(cl).replace('_'," "))
         en_text=str(cl).replace('_'," ")
-        trans_ta = translate({"inputs": [">>rus<< "+en_text, ">>tat<< "+en_text, ">>deu<< "+en_text,], ">>fra<< "+en_text,], ">>ita<< "+en_text,],}, API_URL_ta)
+        trans_ta = translate({"inputs": [">>rus<< "+en_text, ">>tat<< "+en_text, ">>deu<< "+en_text, ">>fra<< "+en_text, ">>ita<< "+en_text,]}, API_URL_ta)
         sleep_duration = 0.5
         tr_test=tuple(trans_ta())
         sleep_duration = 0.5
