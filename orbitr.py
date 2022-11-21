@@ -5,6 +5,7 @@ import streamlit as st
 from PIL import Image
 from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
 
+@st.cache(allow_output_mutation=True)
 model = VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 feature_extractor = ViTFeatureExtractor.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 tokenizer = AutoTokenizer.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
