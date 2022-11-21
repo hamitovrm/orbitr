@@ -44,13 +44,15 @@ def print_predictions(preds):
     for cl in preds:
         #st.write(str(cl).replace('_'," "))
         en_text=str(cl).replace('_'," ")
-        trans_ta = translate({"inputs": [">>rus<< "+en_text, ">>tat<< "+en_text, ">>deu<< "+en_text,],}, API_URL_ta)
+        trans_ta = translate({"inputs": [">>rus<< "+en_text, ">>tat<< "+en_text, ">>deu<< "+en_text,], ">>fra<< "+en_text,], ">>ita<< "+en_text,],}, API_URL_ta)
         sleep_duration = 0.5
         tr_test=tuple(trans_ta())
         sleep_duration = 0.5
-        st.write('rus', tr_test[0]["translation_text"])
-        st.write('tat', tr_test[1]["translation_text"])
-        st.write('ger', tr_test[2]["translation_text"])
+        st.write('рус: ', tr_test[0]["translation_text"])
+        st.write('тат: ', tr_test[1]["translation_text"])
+        st.write('deu: ', tr_test[2]["translation_text"])
+        st.write('fra:', tr_test[3]["translation_text"])
+        st.write('ita', tr_test[4]["translation_text"])
         #for tt in tr_test:
         #    st.write(str(tt['translation_text']))
 	    
