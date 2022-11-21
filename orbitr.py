@@ -45,9 +45,9 @@ def print_predictions(preds):
         #st.write(str(cl).replace('_'," "))
         en_text=str(cl).replace('_'," ")
         trans_ta = translate({"inputs": [">>rus<< "+en_text, ">>tat<< "+en_text, ">>deu<< "+en_text, ">>fra<< "+en_text, ">>ita<< "+en_text,]}, API_URL_ta)
-        sleep_duration = 0.1
+        sleep_duration = 0.5
         tr_test=tuple(trans_ta())
-        sleep_duration = 0.1
+        sleep_duration = 0.5
         st.write('рус: ', tr_test[0]["translation_text"])
         st.write('тат: ', tr_test[1]["translation_text"])
         st.write('deu: ', tr_test[2]["translation_text"])
@@ -79,7 +79,7 @@ headers = {"Authorization": f"Bearer {'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'}"}
 #    print_predictions(preds)        
             
 im=load_image()
-sleep_duration = 0.2
+sleep_duration = 0.5
 result = st.button('Распознать и перевести:')
 if result:
    preds = predict_step(im)
