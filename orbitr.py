@@ -48,9 +48,9 @@ def print_predictions(preds):
         sleep_duration = 0.5
         tr_test=tuple(trans_ta())
         sleep_duration = 0.5
-	st.write('rus', tt[0]["translation_text"])
-	st.write('tat', tt[1]["translation_text"])
-	st.write('ger', tt[2]["translation_text"])
+        st.write('rus', tt[0]["translation_text"])
+        st.write('tat', tt[1]["translation_text"])
+        st.write('ger', tt[2]["translation_text"])
         #for tt in tr_test:
         #    st.write(str(tt['translation_text']))
 	    
