@@ -32,7 +32,7 @@ def translate(payload, API_URL):
 	return response.json
 
 def load_image():
-    uploaded_file = st.file_uploader(label='Загрузите изображение:', type = ['png', 'jpg'])
+    uploaded_file = st.file_uploader(label='Загрузите изображение:', type=["png", "jpg", "jpeg"] )
     if uploaded_file is not None:
         image_data = uploaded_file.getvalue()
         st.image(image_data)
