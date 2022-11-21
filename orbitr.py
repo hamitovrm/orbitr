@@ -52,7 +52,7 @@ def print_predictions(preds):
         st.write('тат: ', tr_test[1]["translation_text"])
         st.write('deu: ', tr_test[2]["translation_text"])
         st.write('fra:', tr_test[3]["translation_text"])
-        st.write('ita', tr_test[4]["translation_text"])
+        st.write('ita:', tr_test[4]["translation_text"])
         #for tt in tr_test:
         #    st.write(str(tt['translation_text']))
 	    
