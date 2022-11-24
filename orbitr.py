@@ -85,5 +85,6 @@ if result:
    preds = predict_step(im)
    st.write('**На картинке:**')
    st.write(str(preds))
+   sleep_duration = 0.5
    print_predictions(preds) 
 
