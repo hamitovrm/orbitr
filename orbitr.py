@@ -5,6 +5,7 @@ import streamlit as st
 from PIL import Image
 from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
 
+#кэшируем модели для разспознавания
 @st.cache(allow_output_mutation=True)
 def load_model():
     return VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
@@ -15,6 +16,7 @@ def load_feature_extractor():
 def load_tokenizer():
     return AutoTokenizer.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 
+# Функция распознавания объектов на изображении
 def predict_step(image):
   images = []
   if image.mode != "RGB":
@@ -27,10 +29,12 @@ def predict_step(image):
   preds = [pred.strip() for pred in preds]
   return preds
 
+# Функция обращения к API переводчика
 def translate(payload, API_URL):
 	response = requests.post(API_URL, headers=headers, json=payload )
 	return response.json
 
+# Функция загрузки ихображения через Streamlit
 def load_image():
     uploaded_file = st.file_uploader(label='Загрузите изображение:')
     if uploaded_file is not None:
@@ -40,6 +44,7 @@ def load_image():
     else:
         return None
 
+# Фукнция вызова отображения переводов
 def print_predictions(preds):
     for cl in preds:
         #st.write(str(cl).replace('_'," "))
