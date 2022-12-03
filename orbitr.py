@@ -53,20 +53,20 @@ def print_predictions(preds):
         for tt in tr_test:
             st.write(str(tt['translation_text']))
             
-#url = "http://images.cocodataset.org/val2017/000000039769.jpg"
-#with Image.open(requests.get(url, stream=True).raw) as image1:
-#    st.image(image1)
- #   preds = predict_step(image1)
-  #  st.write(preds)
- #   print_predictions(preds)        
- #   st.write(type(image1))    
+url = "http://images.cocodataset.org/val2017/000000039769.jpg"
+with Image.open(requests.get(url, stream=True).raw) as image1:
+    st.image(image1)
+    preds = predict_step(image1)
+    st.write(preds)
+    print_predictions(preds)        
+    st.write(type(image1))    
             
 st.title('Распознавание объектов с переводом на разные языки')
 im=load_image()
 result = st.button('Распознать изображение')
 if result:
    st.write(type(im))
-   #preds = predict_step(x)
-#        st.write('**Результаты распознавания:**')
-#        st.write(str(preds))
+   preds = predict_step(im)
+   st.write('**Результаты распознавания:**')
+   st.write(str(preds))
 
