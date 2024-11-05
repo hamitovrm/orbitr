@@ -6,7 +6,7 @@ from PIL import Image
 from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
 
 #кэшируем модели для разспознавания
-@st.cache_data(allow_output_mutation=True)
+@st.cache_data #устарело @st.cache(allow_output_mutation=True)
 def load_model():
     return VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 @st.cache(allow_output_mutation=True)
