@@ -3,3 +3,4 @@ torch
 transformers
 requests
 tensorflow-cpu
+langchain-huggingface

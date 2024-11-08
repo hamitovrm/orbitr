@@ -4,6 +4,7 @@ import requests
 import streamlit as st
 from PIL import Image
 from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
+from langchain_huggingface import HuggingFaceEmbeddings
 
 #кэшируем модели для разспознавания
 @st.cache_data
