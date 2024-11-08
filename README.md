@@ -13,6 +13,16 @@ https://huggingface.co/Helsinki-NLP/opus-mt-en-mul
 
 https://orbitr.streamlit.app/
 
+
+Для подготовки среды выполнения:
+1 Установить python 3.9
+2 создать виртуальную среду: 
+    py -3.9 -m venv venv  
+3 активировать среду: 
+    .venv\scripts\activate.bat
+4 Установить зависимости:
+    pip install requirements.txt
+
+
 Для локального запуска ввести в коммандной строке:
 streamlit run orbitr.py
-

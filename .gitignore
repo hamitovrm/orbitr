@@ -1,0 +1,7 @@
+*.venv_
+.vscode/extensions.json
+*.venv/
+/venv/
+venv/
+venv/*.*
+venv/*

@@ -6,7 +6,7 @@ from PIL import Image
 from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
 
 #кэшируем модели для разспознавания
-@st.cache(allow_output_mutation=True)
+@st.cache_data #(allow_output_mutation=True)
 def load_model():
     return VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 @st.cache(allow_output_mutation=True)
@@ -49,15 +49,13 @@ def print_predictions(preds):
     for cl in preds:
         #st.write(str(cl).replace('_'," "))
         en_text=str(cl).replace('_'," ")
-        trans_ta = translate({"inputs": [">>rus<< "+en_text, ">>tat<< "+en_text, ">>deu<< "+en_text, ">>fra<< "+en_text, ">>ita<< "+en_text,]}, API_URL_ta)
-        sleep_duration = 0.5
+        trans_ta = translate({"inputs":  [">>rus<< "+en_text,  ">>deu<< "+en_text, ],
+                             "parameters":{ "src_lang":"en", "tgt_lang":"ru_RU"}
+                             }, API_URL_ta)
+        sleep_duration = 5
         tr_test=tuple(trans_ta())
-        sleep_duration = 0.5
-        st.write('рус: ', tr_test[0]["translation_text"])
-        st.write('тат: ', tr_test[1]["translation_text"])
-        st.write('deu: ', tr_test[2]["translation_text"])
-        st.write('fra:', tr_test[3]["translation_text"])
-        st.write('ita:', tr_test[4]["translation_text"])
+        st.write('рус.: ', str(tr_test[0]["translation_text"]))
+        st.write('нем.: ', str(tr_test[1]["translation_text"]))
         #for tt in tr_test:
         #    st.write(str(tt['translation_text']))
 	    
@@ -70,10 +68,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 max_length = 16
 num_beams = 4
-gen_kwargs = {"max_length": max_length, "num_beams": num_beams}
+gen_kwargs = {"max_length": max_length, "num_beams": num_beams} 
 
 API_URL_ta = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-mul"
-headers = {"Authorization": f"Bearer {'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'}"}
+headers = {"Authorization": f"Bearer {'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'}"}
 
 #Тестовое изображение
 #url = "http://images.cocodataset.org/val2017/000000039769.jpg"
@@ -89,7 +87,6 @@ result = st.button('Распознать и перевести:')
 if result:
    preds = predict_step(im)
    st.write('**На картинке:**')
-   st.write(str(preds))
-   sleep_duration = 0.5
+   st.write('анг.: ', str(preds[0]))
    print_predictions(preds) 
 
