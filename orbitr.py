@@ -71,7 +71,7 @@ num_beams = 4
 gen_kwargs = {"max_length": max_length, "num_beams": num_beams} 
 
 API_URL_ta = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-mul"
-headers = {"Authorization": f"Bearer {'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'}"}
+headers = {"Authorization": f"Bearer {'HugginFace_token'}"}
 
 #Тестовое изображение
 #url = "http://images.cocodataset.org/val2017/000000039769.jpg"
